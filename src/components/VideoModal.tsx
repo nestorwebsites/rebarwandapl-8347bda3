@@ -14,19 +14,8 @@ export function VideoModal({ videoId, title, youtubeUrl, onClose }: VideoModalPr
   const ytId = extractYoutubeId(youtubeUrl);
 
   useEffect(() => {
-    // Increment view count
-    supabase.rpc("increment_views" as never, { video_id: videoId } as never).then(() => {});
-    // Fallback: direct update
-    supabase
-      .from("videos")
-      .select("views")
-      .eq("id", videoId)
-      .single()
-      .then(({ data }) => {
-        if (data) {
-          supabase.from("videos").update({ views: data.views + 1 }).eq("id", videoId).then(() => {});
-        }
-      });
+    // Atomically increment view count
+    supabase.rpc("increment_views", { video_id: videoId }).then(() => {});
 
     const handleEsc = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", handleEsc);
