@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Wifi, Cloud, Zap } from "lucide-react";
+import { Zap } from "lucide-react";
 
 const seedVideos = [
   { title: "Amavubi vs APR FC - Full Match", youtube_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "livefeed", views: 142 },
@@ -49,27 +49,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Status Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="rounded-xl bg-card border border-border p-5">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-8 h-8 rounded-full bg-success/20 flex items-center justify-center">
-              <Wifi size={16} className="text-success" />
-            </div>
-            <h3 className="font-semibold text-foreground">Live Status</h3>
-          </div>
-          <p className="text-sm text-success font-medium">System Online</p>
-        </div>
-        <div className="rounded-xl bg-card border border-border p-5">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-              <Cloud size={16} className="text-primary" />
-            </div>
-            <h3 className="font-semibold text-foreground">Cloud Database</h3>
-          </div>
-          <p className="text-sm text-success font-medium">Connected</p>
-        </div>
-      </div>
 
       {/* Latest Updates */}
       <div className="rounded-xl bg-card border border-border p-5">
