@@ -1,28 +1,24 @@
-import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MobileNav } from "./MobileNav";
 
 export function AppHeader() {
-  const location = useLocation();
-  const isAdmin = location.pathname === "/admin";
+  const navigate = useNavigate();
+
+  const handleRefresh = () => {
+    navigate("/");
+    window.location.reload();
+  };
 
   return (
     <header className="h-14 flex items-center justify-between px-4 md:px-6 border-b border-border bg-card/50 backdrop-blur sticky top-0 z-40">
       <div className="flex items-center gap-3">
         <MobileNav />
-        <h1 className="text-sm md:text-lg font-extrabold tracking-wider text-foreground leading-tight">
+        <h1
+          onClick={handleRefresh}
+          className="text-sm md:text-lg font-extrabold tracking-wider text-foreground leading-tight cursor-pointer hover:text-primary transition-colors"
+        >
           REBA <span className="text-primary">RWANDA</span> <span className="hidden sm:inline">PREMIER LEAGUE LIVE</span>
         </h1>
-      </div>
-      <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-primary/20 border border-primary/50 flex items-center justify-center text-sm font-bold text-primary">
-            N
-          </div>
-          <div className="hidden sm:block text-right">
-            <p className="text-xs font-semibold text-foreground">Nestor</p>
-            <p className="text-[10px] text-muted-foreground">{isAdmin ? "Admin" : "Member"}</p>
-          </div>
-        </div>
       </div>
     </header>
   );
