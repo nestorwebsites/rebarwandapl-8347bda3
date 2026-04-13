@@ -11,6 +11,11 @@ export function AppLayout() {
         <main className="flex-1 p-4 md:p-6 overflow-auto">
           <Outlet />
         </main>
+        <footer className="py-4 px-6 text-center border-t border-border">
+          <p className="text-xs text-muted-foreground">
+            Created by Fils Nestor™ © All rights Reserved
+          </p>
+        </footer>
       </div>
     </div>
   );

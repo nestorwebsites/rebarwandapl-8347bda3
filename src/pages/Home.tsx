@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Wifi, Cloud, Zap } from "lucide-react";
+import { Zap } from "lucide-react";
 
 const seedVideos = [
   { title: "Amavubi vs APR FC - Full Match", youtube_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "livefeed", views: 142 },
