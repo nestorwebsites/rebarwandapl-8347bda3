@@ -1,4 +1,4 @@
-import { Home, Radio, Trophy, Dribbble, Smartphone, Settings } from "lucide-react";
+import { Home, Radio, Trophy, Dribbble, Smartphone, Settings, ClipboardList } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
 
@@ -8,6 +8,7 @@ const items = [
   { title: "Highlights", url: "/highlights", icon: Trophy, emoji: "🏆" },
   { title: "Trainings", url: "/trainings", icon: Dribbble, emoji: "⚽" },
   { title: "Shorts", url: "/shorts", icon: Smartphone, emoji: "📱" },
+  { title: "Match Queue", url: "/queued", icon: ClipboardList, emoji: "📋" },
   { title: "Settings", url: "/settings", icon: Settings, emoji: "⚙️" },
 ];
 
