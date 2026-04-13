@@ -2,6 +2,7 @@ import { X } from "lucide-react";
 import { extractYoutubeId } from "@/lib/youtube";
 import { useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { VideoComments } from "@/components/VideoComments";
 
 interface VideoModalProps {
   videoId: string;
@@ -14,7 +15,6 @@ export function VideoModal({ videoId, title, youtubeUrl, onClose }: VideoModalPr
   const ytId = extractYoutubeId(youtubeUrl);
 
   useEffect(() => {
-    // Atomically increment view count
     supabase.rpc("increment_views" as never, { video_id: videoId } as never).then(() => {});
 
     const handleEsc = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
@@ -24,7 +24,7 @@ export function VideoModal({ videoId, title, youtubeUrl, onClose }: VideoModalPr
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm p-4" onClick={onClose}>
-      <div className="relative w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
+      <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
         <button onClick={onClose} className="absolute -top-10 right-0 text-foreground hover:text-primary transition-colors">
           <X size={24} />
         </button>
@@ -44,8 +44,9 @@ export function VideoModal({ videoId, title, youtubeUrl, onClose }: VideoModalPr
               </div>
             )}
           </div>
-          <div className="p-4">
+          <div className="p-4 space-y-4">
             <h2 className="text-lg font-bold text-foreground">{title}</h2>
+            <VideoComments videoId={videoId} />
           </div>
         </div>
       </div>
