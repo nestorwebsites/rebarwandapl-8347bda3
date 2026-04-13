@@ -145,7 +145,7 @@ function AdminDashboard() {
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
           <h2 className="text-2xl md:text-3xl font-extrabold tracking-wider text-foreground">ADMIN DASHBOARD</h2>
-          <p className="text-sm text-muted-foreground">Live Cloud Controller</p>
+          <p className="text-sm text-muted-foreground">REBA RWANDA PREMIER LEAGUE LIVE — Cloud Controller</p>
         </div>
         <div className="flex gap-2">
           <Link to="/" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary text-secondary-foreground text-sm font-medium hover:bg-accent border border-border">
