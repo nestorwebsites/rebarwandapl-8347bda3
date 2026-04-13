@@ -1,13 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 
 const accentColors = ["#E63939", "#22C55E", "#3B82F6", "#F59E0B", "#8B5CF6", "#EC4899"];
 
 export default function SettingsPage() {
-  const [name, setName] = useState("Nestor");
-  const [selectedColor, setSelectedColor] = useState(accentColors[0]);
+  const [name, setName] = useState(() => localStorage.getItem("reba_user_name") || "Nestor");
+  const [selectedColor, setSelectedColor] = useState(() => localStorage.getItem("reba_accent_color") || accentColors[0]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("reba_accent_color");
+    if (saved) {
+      document.documentElement.style.setProperty("--user-accent", saved);
+    }
+  }, []);
 
   const handleSave = () => {
+    localStorage.setItem("reba_user_name", name);
+    localStorage.setItem("reba_accent_color", selectedColor);
+    document.documentElement.style.setProperty("--user-accent", selectedColor);
     toast.success("Settings Applied Successfully");
   };
 
