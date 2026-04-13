@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { MobileNav } from "./MobileNav";
+import { GlobalSearch } from "./GlobalSearch";
 
 export function AppHeader() {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ export function AppHeader() {
           REBA <span className="text-primary">RWANDA</span> <span className="hidden sm:inline">PREMIER LEAGUE LIVE</span>
         </h1>
       </div>
+      <GlobalSearch />
     </header>
   );
 }

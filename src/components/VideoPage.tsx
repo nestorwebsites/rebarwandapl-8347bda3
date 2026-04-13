@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useVideos } from "@/hooks/use-videos";
 import { VideoCard } from "@/components/VideoCard";
 import { VideoModal } from "@/components/VideoModal";
@@ -23,6 +23,19 @@ interface Video {
 export function VideoPage({ category, title, subtitle, loadingMessage, emoji }: VideoPageProps) {
   const { data: videos, isLoading, refetch } = useVideos(category);
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
+  const [liveViewers, setLiveViewers] = useState(0);
+
+  // Simulate live viewers for livefeed
+  useEffect(() => {
+    if (category !== "livefeed") return;
+    setLiveViewers(Math.floor(Math.random() * 50) + 10);
+    const interval = setInterval(() => {
+      setLiveViewers((prev) => Math.max(1, prev + Math.floor(Math.random() * 11) - 5));
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [category]);
+
+  const totalViews = videos?.reduce((sum, v) => sum + (v.views || 0), 0) ?? 0;
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">
@@ -33,9 +46,18 @@ export function VideoPage({ category, title, subtitle, loadingMessage, emoji }: 
         </div>
         <p className="text-muted-foreground">{subtitle}</p>
         {category === "livefeed" && (
-          <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/15 border border-primary/30">
-            <span className="w-2 h-2 rounded-full bg-primary pulse-live" />
-            <span className="text-xs font-semibold text-primary">Live Status: Active</span>
+          <div className="mt-3 flex flex-wrap items-center gap-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/15 border border-primary/30">
+              <span className="w-2 h-2 rounded-full bg-primary pulse-live" />
+              <span className="text-xs font-semibold text-primary">Live</span>
+            </div>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-muted border border-border">
+              <span className="text-xs font-medium text-foreground">👁 Total Views: {totalViews.toLocaleString()}</span>
+            </div>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-success/15 border border-success/30">
+              <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
+              <span className="text-xs font-semibold text-success">{liveViewers} watching now</span>
+            </div>
           </div>
         )}
       </div>
