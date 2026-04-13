@@ -15,7 +15,7 @@ export function VideoModal({ videoId, title, youtubeUrl, onClose }: VideoModalPr
 
   useEffect(() => {
     // Atomically increment view count
-    supabase.rpc("increment_views", { video_id: videoId }).then(() => {});
+    supabase.rpc("increment_views" as never, { video_id: videoId } as never).then(() => {});
 
     const handleEsc = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", handleEsc);
