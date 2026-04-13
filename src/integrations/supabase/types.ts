@@ -14,7 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      admin_config: {
+        Row: {
+          created_at: string
+          hashed_password: string
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          hashed_password: string
+          id?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          hashed_password?: string
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      videos: {
+        Row: {
+          category: string
+          created_at: string
+          id: string
+          title: string
+          views: number
+          youtube_url: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          id?: string
+          title: string
+          views?: number
+          youtube_url: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          id?: string
+          title?: string
+          views?: number
+          youtube_url?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
