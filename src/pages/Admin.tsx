@@ -6,6 +6,7 @@ import { isAdminLoggedIn, setAdminLoggedIn } from "@/lib/admin-auth";
 import { useQueryClient } from "@tanstack/react-query";
 import { Trash2, Pencil, Eye, ExternalLink, RefreshCw, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
+import { AdminMatchQueue } from "@/components/AdminMatchQueue";
 
 interface Video {
   id: string;
@@ -228,6 +229,9 @@ function AdminDashboard() {
           )}
         </div>
       </div>
+
+      {/* Match Queue */}
+      <AdminMatchQueue />
 
       {/* Change Password */}
       <div className="rounded-xl bg-card border border-border p-6 space-y-4">

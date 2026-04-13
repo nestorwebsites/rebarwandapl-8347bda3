@@ -10,6 +10,7 @@ import Trainings from "./pages/Trainings";
 import Shorts from "./pages/Shorts";
 import SettingsPage from "./pages/Settings";
 import Admin from "./pages/Admin";
+import Queued from "./pages/Queued";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/trainings" element={<Trainings />} />
             <Route path="/shorts" element={<Shorts />} />
             <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/queued" element={<Queued />} />
             <Route path="/admin" element={<Admin />} />
           </Route>
           <Route path="*" element={<NotFound />} />

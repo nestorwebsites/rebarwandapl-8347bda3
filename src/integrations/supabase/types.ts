@@ -77,6 +77,36 @@ export type Database = {
           },
         ]
       }
+      match_queue: {
+        Row: {
+          away_team: string
+          created_at: string
+          home_team: string
+          id: string
+          match_date: string
+          status: string
+          venue: string
+        }
+        Insert: {
+          away_team: string
+          created_at?: string
+          home_team: string
+          id?: string
+          match_date: string
+          status?: string
+          venue?: string
+        }
+        Update: {
+          away_team?: string
+          created_at?: string
+          home_team?: string
+          id?: string
+          match_date?: string
+          status?: string
+          venue?: string
+        }
+        Relationships: []
+      }
       videos: {
         Row: {
           category: string
