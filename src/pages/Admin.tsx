@@ -85,6 +85,10 @@ function AdminDashboard() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const { changePassword } = useAdminAuth();
   const queryClient = useQueryClient();
+  const livefeedViewers = usePresenceCount("page-livefeed");
+  const highlightsViewers = usePresenceCount("page-highlights");
+  const trainingsViewers = usePresenceCount("page-trainings");
+  const shortsViewers = usePresenceCount("page-shorts");
 
   const fetchVideos = async () => {
     const { data } = await supabase.from("videos").select("*").order("created_at", { ascending: false });
