@@ -178,15 +178,91 @@ function AdminDashboard() {
         </button>
       </div>
 
-      {/* Stats */}
+      {/* Website Analytics */}
+      <div className="rounded-xl bg-card border border-border p-6 space-y-4">
+        <h3 className="text-lg font-bold text-foreground flex items-center gap-2"><BarChart3 size={20} /> Website Analytics</h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="rounded-lg bg-secondary/50 border border-border p-4 text-center">
+            <Globe size={18} className="mx-auto text-primary mb-1" />
+            <p className="text-2xl font-extrabold text-foreground">7</p>
+            <p className="text-xs text-muted-foreground">Total Visitors (7d)</p>
+          </div>
+          <div className="rounded-lg bg-secondary/50 border border-border p-4 text-center">
+            <TrendingUp size={18} className="mx-auto text-primary mb-1" />
+            <p className="text-2xl font-extrabold text-foreground">94</p>
+            <p className="text-xs text-muted-foreground">Page Views (7d)</p>
+          </div>
+          <div className="rounded-lg bg-secondary/50 border border-border p-4 text-center">
+            <Monitor size={18} className="mx-auto text-primary mb-1" />
+            <p className="text-2xl font-extrabold text-foreground">5</p>
+            <p className="text-xs text-muted-foreground">Desktop Users</p>
+          </div>
+          <div className="rounded-lg bg-secondary/50 border border-border p-4 text-center">
+            <Smartphone size={18} className="mx-auto text-primary mb-1" />
+            <p className="text-2xl font-extrabold text-foreground">2</p>
+            <p className="text-xs text-muted-foreground">Mobile Users</p>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+          <div className="rounded-lg bg-secondary/50 border border-border p-4">
+            <h4 className="text-sm font-semibold text-foreground mb-2">📄 Top Pages</h4>
+            <div className="space-y-1.5 text-xs">
+              {[
+                { page: "Home (/)", views: 7 },
+                { page: "Highlights", views: 5 },
+                { page: "Live Feed", views: 5 },
+                { page: "Shorts", views: 4 },
+                { page: "Trainings", views: 4 },
+                { page: "Admin", views: 3 },
+                { page: "Settings", views: 2 },
+                { page: "Queued", views: 2 },
+              ].map((p) => (
+                <div key={p.page} className="flex justify-between text-muted-foreground">
+                  <span>{p.page}</span>
+                  <span className="font-semibold text-foreground">{p.views}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-lg bg-secondary/50 border border-border p-4">
+            <h4 className="text-sm font-semibold text-foreground mb-2">🌍 Traffic Sources</h4>
+            <div className="space-y-1.5 text-xs">
+              {[
+                { source: "Direct", visits: 4 },
+                { source: "Facebook (Mobile)", visits: 2 },
+                { source: "Facebook (Web)", visits: 1 },
+              ].map((s) => (
+                <div key={s.source} className="flex justify-between text-muted-foreground">
+                  <span>{s.source}</span>
+                  <span className="font-semibold text-foreground">{s.visits}</span>
+                </div>
+              ))}
+            </div>
+            <h4 className="text-sm font-semibold text-foreground mb-2 mt-4">🏳️ Countries</h4>
+            <div className="space-y-1.5 text-xs">
+              {[
+                { country: "🇷🇼 Rwanda", visits: 5 },
+                { country: "🇺🇸 United States", visits: 2 },
+              ].map((c) => (
+                <div key={c.country} className="flex justify-between text-muted-foreground">
+                  <span>{c.country}</span>
+                  <span className="font-semibold text-foreground">{c.visits}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Video & Live Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div className="rounded-xl bg-card border border-border p-5">
-          <h3 className="text-sm text-muted-foreground mb-1">Current Cloud Database</h3>
-          <p className="text-3xl font-extrabold text-foreground">{videos.length} <span className="text-base font-medium text-muted-foreground">Videos</span></p>
+          <h3 className="text-sm text-muted-foreground mb-1">Videos in Database</h3>
+          <p className="text-3xl font-extrabold text-foreground">{videos.length}</p>
         </div>
         <div className="rounded-xl bg-card border border-border p-5">
-          <h3 className="text-sm text-muted-foreground mb-1">Total Views</h3>
-          <p className="text-3xl font-extrabold text-foreground">{videos.reduce((s, v) => s + v.views, 0)} <span className="text-base font-medium text-muted-foreground">Views</span></p>
+          <h3 className="text-sm text-muted-foreground mb-1">Total Video Views</h3>
+          <p className="text-3xl font-extrabold text-foreground">{videos.reduce((s, v) => s + v.views, 0)}</p>
         </div>
         <div className="rounded-xl bg-card border border-border p-5">
           <h3 className="text-sm text-muted-foreground mb-1 flex items-center gap-1"><Users size={14} /> Live Viewers Now</h3>
@@ -197,6 +273,30 @@ function AdminDashboard() {
             <div className="flex justify-between"><span>⚽ Trainings</span><span className="font-semibold text-foreground">{trainingsViewers}</span></div>
             <div className="flex justify-between"><span>📱 Shorts</span><span className="font-semibold text-foreground">{shortsViewers}</span></div>
           </div>
+        </div>
+      </div>
+
+      {/* Per-Video Views Ranking */}
+      <div className="rounded-xl bg-card border border-border overflow-hidden">
+        <div className="p-4 border-b border-border">
+          <h3 className="font-bold text-foreground flex items-center gap-2"><Eye size={16} /> Views Per Video</h3>
+        </div>
+        <div className="divide-y divide-border">
+          {[...videos].sort((a, b) => b.views - a.views).map((v, i) => (
+            <div key={v.id} className="flex items-center justify-between p-3 px-4 hover:bg-accent/50 transition-colors">
+              <div className="flex items-center gap-3 min-w-0">
+                <span className="text-xs font-bold text-muted-foreground w-6 text-center">#{i + 1}</span>
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-foreground truncate">{v.title}</p>
+                  <p className="text-xs text-muted-foreground">{categories.find((c) => c.value === v.category)?.label}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-1 text-sm font-semibold text-foreground shrink-0">
+                <Eye size={14} className="text-primary" /> {v.views}
+              </div>
+            </div>
+          ))}
+          {videos.length === 0 && <div className="p-6 text-center text-muted-foreground text-sm">No videos yet</div>}
         </div>
       </div>
 
