@@ -3,25 +3,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Zap } from "lucide-react";
 
-const seedVideos = [
-  { title: "Amavubi vs APR FC - Full Match", youtube_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "livefeed", views: 142 },
-  { title: "Top 10 Goals - Rwanda Premier League 2025", youtube_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "highlights", views: 389 },
-  { title: "Goalkeeper Training Drills", youtube_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "trainings", views: 67 },
-];
-
 export default function Home() {
-  const [seeded, setSeeded] = useState(false);
-
-  useEffect(() => {
-    async function seed() {
-      const { data } = await supabase.from("videos").select("id").limit(1);
-      if (!data || data.length === 0) {
-        await supabase.from("videos").insert(seedVideos);
-      }
-      setSeeded(true);
-    }
-    seed();
-  }, []);
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
