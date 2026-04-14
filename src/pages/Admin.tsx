@@ -4,9 +4,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAdminAuth } from "@/hooks/use-admin-auth";
 import { isAdminLoggedIn, setAdminLoggedIn } from "@/lib/admin-auth";
 import { useQueryClient } from "@tanstack/react-query";
-import { Trash2, Pencil, Eye, ExternalLink, RefreshCw, Lock } from "lucide-react";
+import { Trash2, Pencil, Eye, ExternalLink, RefreshCw, Lock, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AdminMatchQueue } from "@/components/AdminMatchQueue";
+import { usePresenceCount } from "@/hooks/use-presence";
 
 interface Video {
   id: string;
