@@ -179,7 +179,7 @@ function AdminDashboard() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div className="rounded-xl bg-card border border-border p-5">
           <h3 className="text-sm text-muted-foreground mb-1">Current Cloud Database</h3>
           <p className="text-3xl font-extrabold text-foreground">{videos.length} <span className="text-base font-medium text-muted-foreground">Videos</span></p>
@@ -187,6 +187,16 @@ function AdminDashboard() {
         <div className="rounded-xl bg-card border border-border p-5">
           <h3 className="text-sm text-muted-foreground mb-1">Total Views</h3>
           <p className="text-3xl font-extrabold text-foreground">{videos.reduce((s, v) => s + v.views, 0)} <span className="text-base font-medium text-muted-foreground">Views</span></p>
+        </div>
+        <div className="rounded-xl bg-card border border-border p-5">
+          <h3 className="text-sm text-muted-foreground mb-1 flex items-center gap-1"><Users size={14} /> Live Viewers Now</h3>
+          <p className="text-3xl font-extrabold text-foreground">{livefeedViewers + highlightsViewers + trainingsViewers + shortsViewers}</p>
+          <div className="mt-2 space-y-1 text-xs text-muted-foreground">
+            <div className="flex justify-between"><span>🔴 Live Feed</span><span className="font-semibold text-foreground">{livefeedViewers}</span></div>
+            <div className="flex justify-between"><span>🏆 Highlights</span><span className="font-semibold text-foreground">{highlightsViewers}</span></div>
+            <div className="flex justify-between"><span>⚽ Trainings</span><span className="font-semibold text-foreground">{trainingsViewers}</span></div>
+            <div className="flex justify-between"><span>📱 Shorts</span><span className="font-semibold text-foreground">{shortsViewers}</span></div>
+          </div>
         </div>
       </div>
 
