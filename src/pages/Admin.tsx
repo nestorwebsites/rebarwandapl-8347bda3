@@ -4,9 +4,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAdminAuth } from "@/hooks/use-admin-auth";
 import { isAdminLoggedIn, setAdminLoggedIn } from "@/lib/admin-auth";
 import { useQueryClient } from "@tanstack/react-query";
-import { Trash2, Pencil, Eye, ExternalLink, RefreshCw, Lock } from "lucide-react";
+import { Trash2, Pencil, Eye, ExternalLink, RefreshCw, Lock, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AdminMatchQueue } from "@/components/AdminMatchQueue";
+import { usePresenceCount } from "@/hooks/use-presence";
 
 interface Video {
   id: string;
@@ -84,6 +85,10 @@ function AdminDashboard() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const { changePassword } = useAdminAuth();
   const queryClient = useQueryClient();
+  const livefeedViewers = usePresenceCount("page-livefeed");
+  const highlightsViewers = usePresenceCount("page-highlights");
+  const trainingsViewers = usePresenceCount("page-trainings");
+  const shortsViewers = usePresenceCount("page-shorts");
 
   const fetchVideos = async () => {
     const { data } = await supabase.from("videos").select("*").order("created_at", { ascending: false });
@@ -174,7 +179,7 @@ function AdminDashboard() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div className="rounded-xl bg-card border border-border p-5">
           <h3 className="text-sm text-muted-foreground mb-1">Current Cloud Database</h3>
           <p className="text-3xl font-extrabold text-foreground">{videos.length} <span className="text-base font-medium text-muted-foreground">Videos</span></p>
@@ -182,6 +187,16 @@ function AdminDashboard() {
         <div className="rounded-xl bg-card border border-border p-5">
           <h3 className="text-sm text-muted-foreground mb-1">Total Views</h3>
           <p className="text-3xl font-extrabold text-foreground">{videos.reduce((s, v) => s + v.views, 0)} <span className="text-base font-medium text-muted-foreground">Views</span></p>
+        </div>
+        <div className="rounded-xl bg-card border border-border p-5">
+          <h3 className="text-sm text-muted-foreground mb-1 flex items-center gap-1"><Users size={14} /> Live Viewers Now</h3>
+          <p className="text-3xl font-extrabold text-foreground">{livefeedViewers + highlightsViewers + trainingsViewers + shortsViewers}</p>
+          <div className="mt-2 space-y-1 text-xs text-muted-foreground">
+            <div className="flex justify-between"><span>🔴 Live Feed</span><span className="font-semibold text-foreground">{livefeedViewers}</span></div>
+            <div className="flex justify-between"><span>🏆 Highlights</span><span className="font-semibold text-foreground">{highlightsViewers}</span></div>
+            <div className="flex justify-between"><span>⚽ Trainings</span><span className="font-semibold text-foreground">{trainingsViewers}</span></div>
+            <div className="flex justify-between"><span>📱 Shorts</span><span className="font-semibold text-foreground">{shortsViewers}</span></div>
+          </div>
         </div>
       </div>
 

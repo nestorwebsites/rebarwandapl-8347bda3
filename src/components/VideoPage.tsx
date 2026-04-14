@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useVideos } from "@/hooks/use-videos";
 import { VideoCard } from "@/components/VideoCard";
 import { VideoModal } from "@/components/VideoModal";
 import { LoadingState } from "@/components/LoadingState";
+import { usePresence } from "@/hooks/use-presence";
 
 interface VideoPageProps {
   category: string;
@@ -23,17 +24,7 @@ interface Video {
 export function VideoPage({ category, title, subtitle, loadingMessage, emoji }: VideoPageProps) {
   const { data: videos, isLoading, refetch } = useVideos(category);
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
-  const [liveViewers, setLiveViewers] = useState(0);
-
-  // Simulate live viewers for livefeed
-  useEffect(() => {
-    if (category !== "livefeed") return;
-    setLiveViewers(Math.floor(Math.random() * 50) + 10);
-    const interval = setInterval(() => {
-      setLiveViewers((prev) => Math.max(1, prev + Math.floor(Math.random() * 11) - 5));
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [category]);
+  const liveViewers = usePresence(`page-${category}`);
 
   const totalViews = videos?.reduce((sum, v) => sum + (v.views || 0), 0) ?? 0;
 
