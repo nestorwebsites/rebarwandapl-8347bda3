@@ -4,9 +4,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAdminAuth } from "@/hooks/use-admin-auth";
 import { isAdminLoggedIn, setAdminLoggedIn } from "@/lib/admin-auth";
 import { useQueryClient } from "@tanstack/react-query";
-import { Trash2, Pencil, Eye, ExternalLink, RefreshCw, Lock, Users, BarChart3, Globe, Monitor, Smartphone, TrendingUp } from "lucide-react";
+import { Trash2, Pencil, Eye, ExternalLink, RefreshCw, Lock, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AdminMatchQueue } from "@/components/AdminMatchQueue";
+import { AdminAnnouncements } from "@/components/AdminAnnouncements";
 import { usePresenceCount } from "@/hooks/use-presence";
 
 interface Video {
@@ -178,81 +179,8 @@ function AdminDashboard() {
         </button>
       </div>
 
-      {/* Website Analytics */}
-      <div className="rounded-xl bg-card border border-border p-6 space-y-4">
-        <h3 className="text-lg font-bold text-foreground flex items-center gap-2"><BarChart3 size={20} /> Website Analytics</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="rounded-lg bg-secondary/50 border border-border p-4 text-center">
-            <Globe size={18} className="mx-auto text-primary mb-1" />
-            <p className="text-2xl font-extrabold text-foreground">7</p>
-            <p className="text-xs text-muted-foreground">Total Visitors (7d)</p>
-          </div>
-          <div className="rounded-lg bg-secondary/50 border border-border p-4 text-center">
-            <TrendingUp size={18} className="mx-auto text-primary mb-1" />
-            <p className="text-2xl font-extrabold text-foreground">94</p>
-            <p className="text-xs text-muted-foreground">Page Views (7d)</p>
-          </div>
-          <div className="rounded-lg bg-secondary/50 border border-border p-4 text-center">
-            <Monitor size={18} className="mx-auto text-primary mb-1" />
-            <p className="text-2xl font-extrabold text-foreground">5</p>
-            <p className="text-xs text-muted-foreground">Desktop Users</p>
-          </div>
-          <div className="rounded-lg bg-secondary/50 border border-border p-4 text-center">
-            <Smartphone size={18} className="mx-auto text-primary mb-1" />
-            <p className="text-2xl font-extrabold text-foreground">2</p>
-            <p className="text-xs text-muted-foreground">Mobile Users</p>
-          </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-          <div className="rounded-lg bg-secondary/50 border border-border p-4">
-            <h4 className="text-sm font-semibold text-foreground mb-2">📄 Top Pages</h4>
-            <div className="space-y-1.5 text-xs">
-              {[
-                { page: "Home (/)", views: 7 },
-                { page: "Highlights", views: 5 },
-                { page: "Live Feed", views: 5 },
-                { page: "Shorts", views: 4 },
-                { page: "Trainings", views: 4 },
-                { page: "Admin", views: 3 },
-                { page: "Settings", views: 2 },
-                { page: "Queued", views: 2 },
-              ].map((p) => (
-                <div key={p.page} className="flex justify-between text-muted-foreground">
-                  <span>{p.page}</span>
-                  <span className="font-semibold text-foreground">{p.views}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="rounded-lg bg-secondary/50 border border-border p-4">
-            <h4 className="text-sm font-semibold text-foreground mb-2">🌍 Traffic Sources</h4>
-            <div className="space-y-1.5 text-xs">
-              {[
-                { source: "Direct", visits: 4 },
-                { source: "Facebook (Mobile)", visits: 2 },
-                { source: "Facebook (Web)", visits: 1 },
-              ].map((s) => (
-                <div key={s.source} className="flex justify-between text-muted-foreground">
-                  <span>{s.source}</span>
-                  <span className="font-semibold text-foreground">{s.visits}</span>
-                </div>
-              ))}
-            </div>
-            <h4 className="text-sm font-semibold text-foreground mb-2 mt-4">🏳️ Countries</h4>
-            <div className="space-y-1.5 text-xs">
-              {[
-                { country: "🇷🇼 Rwanda", visits: 5 },
-                { country: "🇺🇸 United States", visits: 2 },
-              ].map((c) => (
-                <div key={c.country} className="flex justify-between text-muted-foreground">
-                  <span>{c.country}</span>
-                  <span className="font-semibold text-foreground">{c.visits}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Announcements */}
+      <AdminAnnouncements />
 
       {/* Video & Live Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
