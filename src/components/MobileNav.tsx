@@ -9,6 +9,7 @@ const items = [
   { title: "Highlights", url: "/highlights", emoji: "🏆" },
   { title: "Trainings", url: "/trainings", emoji: "⚽" },
   { title: "Shorts", url: "/shorts", emoji: "📱" },
+  { title: "International Sports", url: "/international", emoji: "🌍" },
   { title: "Match Queue", url: "/queued", emoji: "📋" },
   { title: "Settings", url: "/settings", emoji: "⚙️" },
 ];

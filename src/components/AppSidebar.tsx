@@ -8,6 +8,7 @@ const items = [
   { title: "Highlights", url: "/highlights", icon: Trophy, emoji: "🏆" },
   { title: "Trainings", url: "/trainings", icon: Dribbble, emoji: "⚽" },
   { title: "Shorts", url: "/shorts", icon: Smartphone, emoji: "📱" },
+  { title: "International Sports", url: "/international", icon: Trophy, emoji: "🌍" },
   { title: "Match Queue", url: "/queued", icon: ClipboardList, emoji: "📋" },
   { title: "Settings", url: "/settings", icon: Settings, emoji: "⚙️" },
 ];
