@@ -1,15 +1,28 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Zap, Megaphone } from "lucide-react";
+import { Zap, Megaphone, Home as HomeIcon } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { useVideos } from "@/hooks/use-videos";
+import { VideoCard } from "@/components/VideoCard";
+import { VideoModal } from "@/components/VideoModal";
 
 interface Announcement {
   id: string;
   message: string;
 }
 
+interface Video {
+  id: string;
+  title: string;
+  youtube_url: string;
+  category: string;
+  views: number;
+}
+
 export default function Home() {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
+  const { data: homeVideos, refetch } = useVideos("home");
+  const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
 
   useEffect(() => {
     const fetchAnnouncements = async () => {
@@ -37,7 +50,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8">
+    <div className="max-w-6xl mx-auto space-y-8">
       {/* Hero */}
       <div className="space-y-3">
         <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-foreground">
@@ -82,6 +95,28 @@ export default function Home() {
         </div>
       )}
 
+      {/* Featured Home Videos */}
+      {homeVideos && homeVideos.length > 0 && (
+        <div className="space-y-4">
+          <div className="flex items-center gap-2">
+            <HomeIcon size={18} className="text-primary" />
+            <h3 className="text-xl font-bold text-foreground">Featured Videos</h3>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {homeVideos.map((v) => (
+              <VideoCard
+                key={v.id}
+                title={v.title}
+                youtubeUrl={v.youtube_url}
+                category={v.category}
+                views={v.views}
+                onClick={() => setSelectedVideo(v as Video)}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Latest Updates */}
       <div className="rounded-xl bg-card border border-border p-5">
         <div className="flex items-center gap-2 mb-3">
@@ -93,6 +128,18 @@ export default function Home() {
           Stream live games, catch up on highlights, and master your skills with professional training content.
         </p>
       </div>
+
+      {selectedVideo && (
+        <VideoModal
+          videoId={selectedVideo.id}
+          title={selectedVideo.title}
+          youtubeUrl={selectedVideo.youtube_url}
+          onClose={() => {
+            setSelectedVideo(null);
+            refetch();
+          }}
+        />
+      )}
     </div>
   );
 }
