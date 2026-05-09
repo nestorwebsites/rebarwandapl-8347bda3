@@ -10,6 +10,7 @@ interface VideoCardProps {
 }
 
 const categoryConfig: Record<string, { emoji: string; label: string; color: string }> = {
+  home: { emoji: "🏠", label: "Featured", color: "bg-accent text-foreground" },
   livefeed: { emoji: "🔴", label: "Live Feed", color: "bg-primary/20 text-primary" },
   highlights: { emoji: "🏆", label: "Highlights", color: "bg-gold/20 text-gold" },
   trainings: { emoji: "⚽", label: "Trainings", color: "bg-success/20 text-success" },

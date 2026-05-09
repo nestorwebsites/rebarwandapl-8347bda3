@@ -20,6 +20,7 @@ interface Video {
 }
 
 const categories = [
+  { value: "home", label: "🏠 Home" },
   { value: "livefeed", label: "🔴 Live Feed" },
   { value: "highlights", label: "🏆 Highlights" },
   { value: "trainings", label: "⚽ Trainings" },
