@@ -15,6 +15,7 @@ const categoryConfig: Record<string, { emoji: string; label: string; color: stri
   highlights: { emoji: "🏆", label: "Highlights", color: "bg-gold/20 text-gold" },
   trainings: { emoji: "⚽", label: "Trainings", color: "bg-success/20 text-success" },
   shorts: { emoji: "📱", label: "Shorts", color: "bg-blue-500/20 text-blue-400" },
+  international: { emoji: "🌍", label: "International", color: "bg-purple-500/20 text-purple-300" },
 };
 
 export function VideoCard({ title, youtubeUrl, category, views, onClick }: VideoCardProps) {

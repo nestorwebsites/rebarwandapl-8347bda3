@@ -8,6 +8,7 @@ import LiveFeed from "./pages/LiveFeed";
 import Highlights from "./pages/Highlights";
 import Trainings from "./pages/Trainings";
 import Shorts from "./pages/Shorts";
+import International from "./pages/International";
 import SettingsPage from "./pages/Settings";
 import Admin from "./pages/Admin";
 import Queued from "./pages/Queued";
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/highlights" element={<Highlights />} />
             <Route path="/trainings" element={<Trainings />} />
             <Route path="/shorts" element={<Shorts />} />
+            <Route path="/international" element={<International />} />
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="/queued" element={<Queued />} />
             <Route path="/admin" element={<Admin />} />

@@ -20,11 +20,12 @@ interface Video {
 }
 
 const categories = [
-  { value: "home", label: "🏠 Home" },
+  { value: "home", label: "🏠 Home (/)" },
   { value: "livefeed", label: "🔴 Live Feed" },
   { value: "highlights", label: "🏆 Highlights" },
   { value: "trainings", label: "⚽ Trainings" },
   { value: "shorts", label: "📱 Shorts" },
+  { value: "international", label: "🌍 International Sports" },
 ];
 
 function AdminLogin({ onLogin }: { onLogin: () => void }) {
