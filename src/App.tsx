@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AppLayout } from "@/components/AppLayout";
+import { SplashScreen } from "@/components/SplashScreen";
 import Home from "./pages/Home";
 import LiveFeed from "./pages/LiveFeed";
 import Highlights from "./pages/Highlights";
