@@ -21,6 +21,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Sonner />
+      <SplashScreen />
       <BrowserRouter>
         <Routes>
           <Route element={<AppLayout />}>
